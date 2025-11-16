@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-wrapper">
+
+  <!-- TITLE -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Meeting, Call, Task...">
+
+    <mat-error *ngIf="form.get('title')?.hasError('required')">
+      Title is required.
+    </mat-error>
+
+    <mat-error *ngIf="form.get('title')?.hasError('minlength')">
+      Minimum 3 characters.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- DATE -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Date</mat-label>
+    <input matInput type="date" formControlName="date">
+  </mat-form-field>
+
+  <!-- START TIME -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Start Time</mat-label>
+    <input matInput type="time" formControlName="startTime">
+  </mat-form-field>
+
+  <!-- DURATION -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Duration (minutes)</mat-label>
+    <input matInput type="number" formControlName="durationMins" min="15">
+    
+    <mat-error *ngIf="form.get('durationMins')?.hasError('min')">
+      Minimum duration is 15 minutes.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- SUBMIT BUTTON -->
+  <button mat-raised-button 
+          color="primary" 
+          class="full-width"
+          [disabled]="form.invalid">
+    Add Appointment
+  </button>
+
+</form>

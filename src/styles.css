@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+html, body { height: 100%; margin: 0; }
+body { font-family: Roboto, Arial, sans-serif; }
+.calendar { padding: 16px; }
+.day-column { border-left: 1px solid #eee; min-height: 560px; position: relative; }
+.appointment { padding: 6px 8px; border-radius: 4px; background: #3f51b5; color: #fff; margin: 4px 0; cursor: grab; }

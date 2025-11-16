@@ -1,0 +1,42 @@
+<div class="calendar">
+    <div style="display:flex; gap:16px; align-items:flex-start">
+        <mat-card style="width:320px;">
+            <app-appointment-form></app-appointment-form>
+        </mat-card>
+
+
+        <div style="flex:1; display:flex; gap:8px;">
+            <div *ngFor="let day of days" class="day-column" style="flex:1; padding:8px;">
+                <h4>{{ day | date: 'EEE dd/MM' }}</h4>
+
+
+                <!-- each day receives drops -->
+                <div cdkDropList [cdkDropListData]="getAppointmentsForDay(day)" (cdkDropListDropped)="drop($event, day)"
+                    style="min-height:320px;">
+                    <!-- filter appointments for this day -->
+                    <ng-container *ngIf="appointments | async as appts">
+                        <div *ngFor="let appt of getAppointmentsForDay(day)"
+                            cdkDrag [cdkDragData]="appt" class="appointment">
+                            <div style="display:flex; justify-content:space-between; align-items:center">
+                                <div>
+                                    <strong>{{ appt.title }}</strong>
+                                    <div style="font-size:12px">{{ appt.start | date:'shortTime' }} - {{ appt.end |
+                                        date:'shortTime' }}</div>
+                                </div>
+                                <div>
+                                    <button mat-icon-button
+                                        (click)="delete(appt.id)"><mat-icon>delete</mat-icon></button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hour-grid">
+  <div *ngFor="let hour of hours" class="hour-row">
+     {{ hour }}:00
+  </div>
+</div>
